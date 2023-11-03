@@ -146,7 +146,7 @@ Note, the complete code **is not a fully fleshed out app**; it just illustrates 
 
 [Approach B](approach_a) is a variant of  an approach that AFAIK was [first proposed by Dave Cheney](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis) which he called _"Functional options for Friendly APIs."_ Dave Calhoun [has covered it](https://www.calhoun.io/using-functional-options-instead-of-method-chaining-in-go/) as well as many others since Dave, too. The proposed v2 of the standard `encoding/json` package [also chose this approach](https://github.com/golang/go/discussions/63397). 
 
-Here is our equivalent to Approach A for `Policy` when using option funcs aka Approach B. Note how the `Set*()` and `Add*()` methods return a closure that gets executed in `NewPolicy()`: 
+Here is our Approach B for `Policy` when using option funcs _(as compared to Approach A with option structs above)._ Note how the `Set*()` and `Add*()` methods return a closure that gets executed in `NewPolicy()`: 
 
 ```go
 type Policy struct {
