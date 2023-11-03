@@ -1,0 +1,3 @@
+package insure
+
+const tab = "  "
