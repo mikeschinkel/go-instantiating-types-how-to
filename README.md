@@ -26,7 +26,7 @@ Here are the things that came to mind while reading the asker's code. They are n
 
 ## Approach A — Using  _"Options"_ structs
 
-[Approach A](tree/main/approach_a) is generally my preferred approach and it uses a bespoke **options struct** for each entity struct's optional properties.   
+[Approach A](approach_a) is generally my preferred approach and it uses a bespoke **options struct** for each entity struct's optional properties.   
 
 Here is what that looks like for `Policy`, which I derived from [the asker's original code](https://go.dev/play/p/2T4St61sN5Y): 
 
@@ -138,13 +138,13 @@ func addYear(t time.Time) time.Time {
 const shortFormTime = "2006-01-02"
 ```
 
-You can see the [**complete code for Approach A here**](tree/main/approach_a).
+You can see the [**complete code for Approach A here**](approach_a).
 
 Note, the complete code **is not a fully fleshed out app**; it just illustrates the points mentioned here but does not try to go farther.
 
 ## Approach B — Using _"Options"_ funcs
 
-[Approach B](tree/main/approach_a) is a variant of  an approach that AFAIK was [first proposed by Dave Cheney](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis) which he called _"Functional options for Friendly APIs."_ Dave Calhoun [has covered it](https://www.calhoun.io/using-functional-options-instead-of-method-chaining-in-go/) as well as many others since Dave, too. The proposed v2 of the standard `encoding/json` package [also chose this approach](https://github.com/golang/go/discussions/63397). 
+[Approach B](approach_a) is a variant of  an approach that AFAIK was [first proposed by Dave Cheney](https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis) which he called _"Functional options for Friendly APIs."_ Dave Calhoun [has covered it](https://www.calhoun.io/using-functional-options-instead-of-method-chaining-in-go/) as well as many others since Dave, too. The proposed v2 of the standard `encoding/json` package [also chose this approach](https://github.com/golang/go/discussions/63397). 
 
 Here is our equivalent to Approach A for `Policy` when using option funcs aka Approach B. Note how the `Set*()` and `Add*()` methods return a closure that gets executed in `NewPolicy()`: 
 
@@ -276,7 +276,7 @@ func addYear(t time.Time) time.Time {
 }
 ```
 
-You can see the [**complete code for Approach B here**](tree/main/approach_b).
+You can see the [**complete code for Approach B here**](approach_b).
 
 
 ## The Output of Both Approaches
