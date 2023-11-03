@@ -278,6 +278,7 @@ func addYear(t time.Time) time.Time {
 
 You can see the [**complete code for Approach B here**](approach_b).
 
+Note, this code also is **notnot a fully fleshed out**; it also just illustrates the points mentioned here but does not try to go farther.
 
 ## The Output of Both Approaches
 So you can visualize the output of the two different approaches, here is what you'll see from both them:
