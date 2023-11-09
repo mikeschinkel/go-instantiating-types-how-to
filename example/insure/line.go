@@ -54,6 +54,10 @@ func (l *Line) AddRisk(risk *Risk) *Line {
 	return l
 }
 
+func (l *Line) Risks() Risks {
+	return l.risks
+}
+
 func (l *Line) AddLocation(location *Location) *Line {
 	l.locations = append(l.locations, location)
 	return l

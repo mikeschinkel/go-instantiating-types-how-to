@@ -84,15 +84,16 @@ end:
 	return f, err
 }
 
-func (file *File) ReadRisks() (_ insure.Risks, err error) {
+func (file *File) ReadRisks(line *insure.Line) (err error) {
 	var f *os.File
 	var recNo int
+	var risk *insure.Risk
 
 	f, err = file.open()
 	if err != nil {
 		goto end
 	}
-	defer f.Close()
+	defer Close(f, WarnOnError)
 	recNo = 0
 	for {
 		recNo++
@@ -105,17 +106,18 @@ func (file *File) ReadRisks() (_ insure.Risks, err error) {
 			log.Printf("Error reading line %d; %s", recNo, err.Error())
 			continue
 		}
-		err = file.addRisk()
+		risk, err = file.risk()
 		if err != nil {
 			log.Printf("Error adding risk from record #%d; %s", recNo, err.Error())
 			continue
 		}
+		line.AddRisk(risk)
 	}
 end:
-	return file.risks, err
+	return err
 }
 
-func (file *File) addRisk() (err error) {
+func (file *File) risk() (risk *insure.Risk, err error) {
 	var field, include, deleted, limit string
 
 	opts := insure.RiskOpts{}
@@ -155,12 +157,12 @@ func (file *File) addRisk() (err error) {
 		)
 		goto end
 	}
-	file.risks = append(file.risks, insure.NewRisk(opts.ID, &opts))
+	risk = insure.NewRisk(opts.ID, &opts)
 end:
 	if err != nil {
 		err = fmt.Errorf("failed to get record's '%s' field",
 			field,
 		)
 	}
-	return err
+	return risk, err
 }
